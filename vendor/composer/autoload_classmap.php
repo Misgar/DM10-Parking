@@ -9,4 +9,5 @@ return array(
     'Cliente' => $baseDir . '/backend/Cliente.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DBConnection' => $baseDir . '/backend/Conexao.php',
+    'Vehicle' => $baseDir . '/backend/Veiculo.php',
 );

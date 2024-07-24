@@ -7,15 +7,32 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <?php 
+        include 'header.php'; 
+        require '../vendor/autoload.php';
+    ?>
 
     <div class="container mt-5">
         <h2>Cadastrar Veículo</h2>
-        <form action="cadastrar_veiculo.php" method="post">
+        <?php 
+            $dados = [];
+            $infoClientes = new Cliente();
+
+            $dados = $infoClientes -> listAllClients();
+        ?>
+        <form action="../backend/Cadastrar_carro_action.php" method="post">
             <div class="form-group">
-                <label for="cliente_id">Cliente</label>
+                <label for="cliente_id">CPF do Cliente</label>
                 <select class="form-control" id="cliente_id" name="cliente_id" required>
-                    <!-- Popular com clientes DB -->
+                    <!-- Popular com clientes DB retornando a lista de CPF para vincular o veiculo ao cliente
+                      -->
+        
+                    <?php foreach ($dados as $indice => $valor):?>
+    
+                     <option value="<?= $valor['cpf'];?>"> <?= $valor['cpf'] ;?></option> 
+    
+
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">

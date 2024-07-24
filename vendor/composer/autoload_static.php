@@ -10,6 +10,7 @@ class ComposerStaticInit3060363b7f403fde14b57d0a0c706be9
         'Cliente' => __DIR__ . '/../..' . '/backend/Cliente.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DBConnection' => __DIR__ . '/../..' . '/backend/Conexao.php',
+        'Vehicle' => __DIR__ . '/../..' . '/backend/Veiculo.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

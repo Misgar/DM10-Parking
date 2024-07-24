@@ -6,7 +6,7 @@ require '../vendor/autoload.php';
 
 
 
-class Cliente
+class Vehicle
 {   
     private $cpf;
     private $nome;
@@ -19,40 +19,25 @@ class Cliente
       
 
     // Função para inserir clientes na tabela proprietarios
-    public function createClient($nome, $cpf, $telefone, $email)
+    public function createVehicle($cpf, $modelo, $placa)
     {
         try
         {
             // VERIFICAR SE O CPF JÁ EXISTE NO BANCO ANTES DE INSERIR
             $this->conn = new DBConnection(); 
            
-            $query = $this->conn->returnConnection()->prepare("SELECT * FROM proprietarios WHERE cpf = :cpf");
-            $query -> bindValue(':cpf', $cpf);
-            $query -> execute();
-           
-
-
-            if ($query -> rowCount() <= 0)
-            {
                 $query = $this->conn->returnConnection()->prepare 
                 (
-                    "INSERT INTO proprietarios (nome, cpf, email, celular)
-                     VALUES (:nome, :cpf, :email, :celular)"
+                    "INSERT INTO carrosEstacionados 
+                    (cpfProprietario, marcaCarro, placaCarro)
+                     VALUES (:cpfProprietario, :modelo, :placa)"
                 );
 
-                $query -> bindValue(':nome', $nome);
-                $query -> bindValue(':cpf', $cpf);
-                $query -> bindValue(':email', $email);
-                $query -> bindValue(':celular', $telefone);
+            $query -> bindValue(":cpfProprietario", $cpf);
+            $query -> bindValue(":modelo", $modelo);
+            $query -> bindValue(":placa", $placa);
 
-                echo $this->getTelefone();
-
-               
-
-                $query -> execute();
-            };
-            
-           
+            $query -> execute();      
 
         } catch (Exception $e)
         {
@@ -62,7 +47,7 @@ class Cliente
     }
 
      
-    public function listAllClients() // Função parar retornar os clientes da tabela proprietarios
+    public function listAllVehicles() // Função parar retornar os clientes da tabela proprietarios
     {
         $data = [];
 
@@ -84,7 +69,7 @@ class Cliente
 
     }
 
-    public function listClientByCpf($cpf) // Função para retornar um cliente por ID(CPF)
+    public function listVehicleByCpf($cpf) // Função para retornar um cliente por ID(CPF)
     {
         $data = [];
 
@@ -107,7 +92,7 @@ class Cliente
     }
 
 
-    public function deleteClient($cpf)
+    public function deleteVehicle($cpf)
     {
         try
         {
@@ -138,85 +123,7 @@ class Cliente
         }
     }
 
-    /**
-     * Get the value of cpf
-     */ 
-    public function getCpf()
-    {
-        return $this->cpf;
-    }
-
-
-    /**
-     * Set the value of cpf
-     */
-    public function setCpf($cpf): self
-    {
-        $this->cpf = $cpf;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of nome
-     */
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-
-    /**
-     * Set the value of nome
-     */
-    public function setNome($nome): self
-    {
-        $this->nome = $nome;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of email
-     */ 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set the value of email
-     *
-     * @return  self
-     */ 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of telefone
-     */ 
-    public function getTelefone()
-    {
-        return $this->telefone;
-    }
-
-    /**
-     * Set the value of telefone
-     *
-     * @return  self
-     */ 
-    public function setTelefone($telefone)
-    {
-        $this->telefone = $telefone;
-
-        return $this;
-    }
+  
 }
 
 
