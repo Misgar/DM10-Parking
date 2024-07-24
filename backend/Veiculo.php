@@ -56,7 +56,7 @@ class Vehicle
             
        $query = $this->conn->returnConnection()->prepare
         ("
-            SELECT * FROM proprietarios;
+            SELECT * FROM carrosEStacionados;
         ");
 
         $query -> execute();

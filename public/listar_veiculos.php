@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,16 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <?php 
+        include 'header.php'; 
+        require '../vendor/autoload.php';
+
+        $dados = [];
+        $veiculos = new Vehicle();
+        
+
+        $dados = $veiculos -> listAllVehicles();
+    ?>
 
     <div class="container mt-5">
         <h2>Veículos Cadastrados</h2>
@@ -18,9 +27,39 @@
                     <th>Modelo</th>
                     <th>Placa</th>
                 </tr>
+                
             </thead>
             <tbody>
-                <!-- Popular com os clientes DB -->
+                <tr>
+                    <?php 
+                        echo "<td>";
+                            foreach($dados as $indice => $valor)
+                            {
+                                echo $valor['marcaCarro'];
+                                echo "<br>";
+                            }
+
+                        echo "</td>"; 
+
+                        echo "<td>";
+                            foreach($dados as $indice => $valor)
+                            {
+                                echo $valor['marcaCarro'];
+                                echo "<br>";
+                            }
+
+                        echo "</td>"; 
+
+                        echo "<td>";
+                            foreach($dados as $indice => $valor)
+                            {
+                                echo $valor['placaCarro'];
+                                echo "<br>";
+                            }
+
+                        echo "</td>"; 
+                    ?>
+                </tr>
             </tbody>
         </table>
     </div>
