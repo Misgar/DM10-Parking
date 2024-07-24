@@ -11,7 +11,7 @@
     
     <div class="container mt-5">
         <h2>Cadastrar Cliente</h2>
-        <form action="cadastrar_cliente.php" method="post">
+        <form action="cadastrar_cliente_action.php" method="post">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
@@ -21,9 +21,15 @@
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" required>
+                <label for="CPF">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" required>
             </div>
+            <div class="form-group">
+                <label for="CPF">Telefone</label>
+                <input type="text" class="form-control" id="telefone" name="tefone" required>
+            </div>
+           <input type="hidden" name="ativo" value="0">
+            
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>
