@@ -1,6 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
+
 class DBConnection{
     private $database = 'estacionamento';
     private $host = 'localhost';

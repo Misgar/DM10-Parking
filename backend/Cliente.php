@@ -5,12 +5,6 @@
 require '../vendor/autoload.php';
 
 
-$nome = filter_input(INPUT_POST, 'nome');
-$cpf = filter_input(INPUT_POST, 'cpf');
-$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$telefone = filter_input(INPUT_POST, 'telefone');
-$ativo = filter_input(INPUT_POST, 'status');
-
 
 class Cliente
 {   
@@ -21,7 +15,8 @@ class Cliente
 
     private $telefone;
 
-    private $conn = new DBConnection();    
+    public DBConnection $conn; 
+      
 
     // Função para inserir clientes na tabela proprietarios
     public function createClient($nome, $cpf, $telefone, $email)
@@ -29,12 +24,15 @@ class Cliente
         try
         {
             // VERIFICAR SE O CPF JÁ EXISTE NO BANCO ANTES DE INSERIR
-             $query = $this->conn->returnConnection()->prepare("SELECT * FROM proprietarios WHERE cpf = :cpf");
+            $this->conn = new DBConnection(); 
+           
+            $query = $this->conn->returnConnection()->prepare("SELECT * FROM proprietarios WHERE cpf = :cpf");
              $query -> bindValue(':cpf', $cpf);
              $query -> execute();
+           
 
 
-            if ($query -> rowCount() < 0)
+            if ($query -> rowCount() <= 0)
             {
                 $query = $this->conn->returnConnection()->prepare 
                 (
@@ -42,16 +40,23 @@ class Cliente
                      VALUES (:nome, :cpf, :email, :celular)"
                 );
 
-                $query -> bindValue(':nome', $this->nome);
-                $query -> bindValue(':cpf', $this->cpf);
-                $query -> bindValue(':email', $this->email);
-                $query -> bindValue(':celular', $this->telefone);
-            }
+                $query -> bindValue(':nome', $nome);
+                $query -> bindValue(':cpf', $cpf);
+                $query -> bindValue(':email', $email);
+                $query -> bindValue(':celular', $telefone);
 
-            $query -> execute();
+                echo $this->getTelefone();
+
+               
+
+                $query -> execute();
+            };
+            
+           
 
         } catch (Exception $e)
         {
+        
             echo "Falha ao cadastrar cliente." . $e->getMessage();
         }
     }
@@ -165,13 +170,6 @@ class Cliente
         return $this;
     }
 
-    /**
-     * Get the value of conn
-     */
-    public function getConn()
-    {
-        return $this->conn;
-    }
 
     /**
      * Get the value of email
