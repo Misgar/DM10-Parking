@@ -142,33 +142,34 @@ class Cliente
     {
         try
         {
-       
-            $query = $this->getConn()->returnConnection()->prepare
+            $this->conn = new DBConnection();
+            $query = $this->conn->returnConnection()->prepare
             (
                 "SELECT * FROM proprietarios WHERE cpf = :cpf"
             );
 
-            $query -> bindValue(":cpf", $this->getCpf());
+            $query -> bindValue(":cpf", $cpf);
             $query -> execute();
 
-            if ($query -> rowCount > 0)
+            
+            if ($query -> rowCount() > 0)
             {    
-                $query = $this->getConn()->returnConnection()->prepare
+                
+                $query = $this->conn->returnConnection()->prepare
                 (
                     "DELETE FROM proprietarios WHERE cpf = :cpf"
                 );
-
+    
                 $query -> bindValue(":cpf", $cpf);
-
                 $query -> execute();
-            };
             
-        } catch (Exception $e)
+            
+            }
+        }  catch (Exception $e)
         {
             echo "Falha ao TENTAR DELETAR REGISTRO " . $e -> getMessage();
         }
     }
-
     /**
      * Get the value of cpf
      */ 

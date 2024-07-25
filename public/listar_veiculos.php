@@ -44,7 +44,7 @@
 
                         <td>
                             <a href="editar_cliente_veiculo.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-warning">Editar</a>
-                            <a href="Excluir_action.php?<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
+                            <a href="../backend/Excluir_action.php?cpf=<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
                         </td>
                           
                             

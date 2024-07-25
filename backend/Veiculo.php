@@ -163,35 +163,35 @@ class Vehicle
     {
         try
         {
-       
+            $this->conn = new DBConnection();
             $query = $this->conn->returnConnection()->prepare
             (
-                "DELETE FROM carrosEstacionados WHERE cpfProprietario = :cpf"
+                "SELECT * FROM carrosEstacionados WHERE cpfProprietario = :cpf"
             );
 
-            $query -> bindValue(":cpf", $this->getCpf());
+            $query -> bindValue(":cpf", $cpf);
             $query -> execute();
 
+            
             if ($query -> rowCount() > 0)
             {    
-                $query = $this->getConn()->returnConnection()->prepare
+                
+                $query = $this->conn->returnConnection()->prepare
                 (
-                    "DELETE FROM proprietarios WHERE cpf = :cpf"
+                    "DELETE FROM carrosEstacionados WHERE cpfProprietario = :cpf"
                 );
-
+    
                 $query -> bindValue(":cpf", $cpf);
-
                 $query -> execute();
-            };
             
-        } catch (Exception $e)
-        {
-            echo "Falha ao TENTAR DELETAR REGISTRO " . $e -> getMessage();
+            
         }
+    }  catch (Exception $e)
+    {
+        echo "Falha ao TENTAR DELETAR REGISTRO " . $e -> getMessage();
     }
 
   
 }
-
-
+}
 
