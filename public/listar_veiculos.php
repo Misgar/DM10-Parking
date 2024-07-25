@@ -35,58 +35,26 @@
              
             </thead>
             <tbody>
-                <tr>
-                    <?php 
-                            echo "<td>"; #INSERE O NOME DO PROPRIETARIO
-                                foreach($dadosClientes as $indice => $valor)
-                                {
-                                echo $valor['nome'];
-                                echo "<br>";
-                                }
+                <?php 
+                    foreach($dadosClientes as $indice => $valorProprietarios): ?>
+                    <tr>
+                        <td><?= $valorProprietarios['nome'];?></td>
+                        <td><?= $valorProprietarios['marcaCarro'];?></td>
+                        <td><?= $valorProprietarios['placaCarro'];?></td>
+                        <td>00</td>
 
-                            echo "</td>"; 
-
-                            echo "<td>"; # INSERE O MODELO DO CARRO
-                                foreach($dados as $indice => $valor)
-                                {
-                                    echo $valor['marcaCarro'];
-                                    echo "<br>";
-                                }
-
-                            echo "</td>"; 
-
-                            echo "<td>"; # INSERE A PLACA DO CARRO
-                                foreach($dados as $indice => $valor)
-                                {
-                                    echo $valor['placaCarro'];
-                                    echo "<br>";
-                                }
-
-                            echo "</td>";
-
-                            echo "<td>"; # INSERE O HORARIO DE ENTRADA
-                            foreach($dados as $indice => $valor)
-                            {
-                                echo $valor['placaCarro'];
-                                echo "<br>";
-                            }
-
-                            echo "</td>";
-
-                            echo "<td>";
-                            foreach($dados as $indice => $valor)
-                            {
-
-                            echo "<a href='a?$valor[cpfProprietario]' class='badge badge-warning' > Editar </a> ";
-                            echo "<a href='a?$valor[cpfProprietario]' class='badge badge-danger' > Excluir </a> ";
-                            echo "<br>";
-                            }
-                            echo "</td>";
-
-                    
-                        ?>
+                        <td>
+                            <a href="../backend/Editar_action.php?<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-warning">Editar</a>
+                            <a href="Excluir_action.php?<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
+                        </td>
+                          
+                            
+                          
 
                     </tr>
+                <?php endforeach; ?>
+
+                  
             </tbody>
         </table>
     </div>

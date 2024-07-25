@@ -98,9 +98,9 @@ class Vehicle
 
         $query = $this->conn->returnConnection()->prepare
         (
-            "SELECT carrosEStacionados.cpfProprietario, proprietarios.nome FROM 
-            carrosEstacionados INNER JOIN
-             proprietarios ON proprietarios.cpf = carrosEstacionados.cpfProprietario;"
+            "SELECT carrosEStacionados.cpfProprietario, proprietarios.nome, carrosEstacionados.marcaCarro, 
+            carrosEstacionados.placaCarro FROM 
+            carrosEstacionados INNER JOIN proprietarios ON proprietarios.cpf = carrosEstacionados.cpfProprietario;"
         );
 
         $query -> execute();
