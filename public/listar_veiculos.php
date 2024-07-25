@@ -34,25 +34,27 @@
              
             </thead>
             <tbody>
-                <?php 
-                    foreach($dadosClientes as $indice => $valorProprietarios): ?>
-                    <tr>
-                        <td><?= $valorProprietarios['nome'];?></td>
-                        <td><?= $valorProprietarios['marcaCarro'];?></td>
-                        <td><?= $valorProprietarios['placaCarro'];?></td>
-                        <td>00</td>
+                <?php if ($dadosClientes): ?>
+                    <?php foreach($dadosClientes as $indice => $valorProprietarios): ?>
+                    
+                        <tr>
+                                <td><?= $valorProprietarios['nome'];?></td>
+                            <td><?= $valorProprietarios['marcaCarro'];?></td>
+                            <td><?= $valorProprietarios['placaCarro'];?></td>
+                            <td>00</td>
 
-                        <td>
-                            <a href="editar_cliente_veiculo.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-warning">Editar</a>
-                            <a href="../backend/Excluir_action.php?cpf=<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
-                        </td>
-                          
-                            
-                          
+                            <td>
+                                <a href="editar_cliente_veiculo.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-warning">Editar</a>
+                                <a href="../backend/Excluir_action.php?cpf=<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
+                            </td>                                                
 
-                    </tr>
+                        </tr>
+                
                 <?php endforeach; ?>
-
+                <?php else: ;?>
+                    <h4 class="text-primary">NÃO EXISTEM CLIENTES CADASTRADOS</h4>
+                
+                <?php endif; ?>
                   
             </tbody>
         </table>
