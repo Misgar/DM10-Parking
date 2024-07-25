@@ -105,6 +105,38 @@ class Cliente
 
     }
 
+    public function updateClient($nome, $idade, $celular, $email, $cpf)
+    {   
+        try 
+        {
+            $this->conn = new DBConnection();
+            
+            $query = $this->conn->returnConnection()->prepare
+            (
+                "UPDATE proprietarios
+                 SET nome = :nome,
+                     idade = :idade,
+                     celular = :celular,
+                     email = :email
+                WHERE cpf = :cpf"
+            );
+
+            $query -> bindValue(":nome", $nome);
+            $query -> bindValue(":idade", $idade);
+            $query -> bindValue(":celular", $celular);
+            $query -> bindValue(":email", $email);
+            $query -> bindValue(":cpf", $cpf);
+
+
+            $query -> execute();
+
+            
+        } catch (Exception $e)
+        {
+            echo "Erro ao tentar atualizar Cliente " . $e->getMessage();
+        }
+    }
+
 
     public function deleteClient($cpf)
     {

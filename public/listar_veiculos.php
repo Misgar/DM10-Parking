@@ -10,13 +10,12 @@
     <?php 
         require '../vendor/autoload.php';
 
-        $dados = [];
+    
         $dadosClientes = [];
 
 
         $veiculos = new Vehicle();
-        
-        $dados = $veiculos -> listAllVehicles();
+
         $dadosClientes = $veiculos -> listAllVehicleOwner(); 
        
     ?>
@@ -44,7 +43,7 @@
                         <td>00</td>
 
                         <td>
-                            <a href="../backend/Editar_action.php?<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-warning">Editar</a>
+                            <a href="editar_cliente_veiculo.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-warning">Editar</a>
                             <a href="Excluir_action.php?<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
                         </td>
                           

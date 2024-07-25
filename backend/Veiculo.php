@@ -69,54 +69,94 @@ class Vehicle
 
     }
 
-    public function listVehicleByCpf($cpf) // Função para retornar um cliente por ID(CPF)
+    public function listVehicleInfoById($placa) // Função para retornar um cliente por ID(CPF)
     {
         $data = [];
-
-        $query = $this->getConn()->returnConnection()->prepare
-        (
-            " SELECT * FROM proprietarios WHERE cpf = :cpf"
-        );
-
-        $query -> bindValue(":id", $this->getCpf());
-
-        $query->execute();
-
-        if($query -> rowCount() > 0)
+        try
         {
-            $data = $query->fetch(PDO::FETCH_ASSOC);
+            $this->conn = new DBConnection(); 
+           
+            $query = $this->conn->returnConnection()->prepare
+            (
+                // Join das tabelas de cliente e veiculos, trazendo os dados de cadastro do proprietario do carro especifico
+                "SELECT e.marcaCarro, e.placaCarro, p.nome, p.email,p.idade, p.celular, p.cpf
+                FROM carrosEstacionados e
+                JOIN proprietarios p ON e.cpfProprietario = p.cpf
+                WHERE e.placaCarro = :placa"
+            );
 
-            return $data;
+            $query -> bindValue (":placa", $placa);
+
+            $query->execute();
+
+            if($query -> rowCount() > 0)
+            {
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+    
+                return $data;
+            }
+    
+        } catch (Exception $e)
+        {
+            echo "Falha ao RETORNAR DADOS do cliente." . $e->getMessage();
         }
+       
 
+       
     }
 
     public function listAllVehicleOwner()
 
     {
         $data = [];
-
-        $query = $this->conn->returnConnection()->prepare
-        (
-            "SELECT carrosEStacionados.cpfProprietario, proprietarios.nome, carrosEstacionados.marcaCarro, 
-            carrosEstacionados.placaCarro FROM 
-            carrosEstacionados INNER JOIN proprietarios ON proprietarios.cpf = carrosEstacionados.cpfProprietario;"
-        );
-
-        $query -> execute();
-
-        if($query -> rowCount() > 0)
+        try 
         {
-            $data = $query->fetchAll(PDO::FETCH_ASSOC);
-
-            return $data;
+            $this->conn = new DBConnection();
+            $query = $this->conn->returnConnection()->prepare
+            (
+                "SELECT carrosEStacionados.cpfProprietario, proprietarios.nome, carrosEstacionados.marcaCarro, 
+                carrosEstacionados.placaCarro FROM 
+                carrosEstacionados INNER JOIN proprietarios ON proprietarios.cpf = carrosEstacionados.cpfProprietario;"
+            );
+    
+            $query -> execute();
+    
+            if($query -> rowCount() > 0)
+            {
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+                return $data;
+            }
         }
-        else 
+        catch (Exception $e)
         {
-            return "Erro ao retornar dados dos proprietarios.";
+            echo "Erro ao tentar listar veiculos " . $e->getMessage();
+        }
+    
+    }
+    public function updateVehicle($placa, $modelo, $cpf)
+    {   
+        try 
+        {
+            $this->conn = new DBConnection();
+            $query = $this->conn->returnConnection()->prepare
+            (
+                "UPDATE carrosEstacionados
+                 SET marcaCarro = :modelo, 
+                     placaCarro = :placa
+                WHERE cpfProprietario = :cpf"
+            );
+
+            $query -> bindValue(":modelo", $modelo);
+            $query -> bindValue(":placa", $placa);
+            $query -> bindValue(":cpf", $cpf);
+
+            $query -> execute();
+        } catch (Exception $e)
+        {
+            echo "Erro ao tentar atualizar veiculo " . $e->getMessage();
         }
     }
-
 
 
     public function deleteVehicle($cpf)
@@ -124,7 +164,7 @@ class Vehicle
         try
         {
        
-            $query = $this->getConn()->returnConnection()->prepare
+            $query = $this->conn->returnConnection()->prepare
             (
                 "SELECT * FROM proprietarios WHERE cpf = :cpf"
             );
@@ -132,7 +172,7 @@ class Vehicle
             $query -> bindValue(":cpf", $this->getCpf());
             $query -> execute();
 
-            if ($query -> rowCount > 0)
+            if ($query -> rowCount() > 0)
             {    
                 $query = $this->getConn()->returnConnection()->prepare
                 (
