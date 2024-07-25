@@ -14,30 +14,16 @@ $cpf = $_POST['cliente_id'];
 $cliente = new Cliente();
 $veiculo = new Vehicle();
 
-echo $cpf;
-echo "<br>";
-echo $idade;
-echo "<br>";
-echo $celular;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $modelo;
-echo "<br>";
-echo $placa;
-echo "<br>";
-echo $nome;
-
 
 try
 
 {
     
-    #$cliente -> updateClient($nome, $idade, $celular, $email, $cpf);
-    # $veiculo -> updateVehicle($placa, $modelo, $cpf);
+    $cliente -> updateClient($nome, $idade, $celular, $email, $cpf);
+    $veiculo -> updateVehicle($placa, $modelo, $cpf);
   
-    echo $cpf;
-    #header('Location: ../../public/index.php');
+ 
+    header('Location: ../public/index.php');
     
     
 

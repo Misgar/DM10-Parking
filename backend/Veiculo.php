@@ -166,7 +166,7 @@ class Vehicle
        
             $query = $this->conn->returnConnection()->prepare
             (
-                "SELECT * FROM proprietarios WHERE cpf = :cpf"
+                "DELETE FROM carrosEstacionados WHERE cpfProprietario = :cpf"
             );
 
             $query -> bindValue(":cpf", $this->getCpf());
