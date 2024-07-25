@@ -11,7 +11,7 @@
     
     <div class="container mt-5">
         <h2>Cadastrar Cliente</h2>
-        <form action="../backend/cadastrar_cliente_action.php" method="post">
+        <form action="../backend/Cadastrar_cliente_action.php" method="post">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>

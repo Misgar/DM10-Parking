@@ -13,6 +13,9 @@ try
 
 {
     $cliente -> createClient($nome, $cpf, $telefone, $email);
+
+    header('Location: ../public/cadastrar_veiculo.php');
+    exit;
     
 
 } catch (Exception $e)

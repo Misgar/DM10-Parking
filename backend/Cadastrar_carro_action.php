@@ -14,7 +14,7 @@ try
 {
     $carro -> createVehicle($cpf, $modelo, $placa);
     
-    echo $cpf;
+    header('Location: ../');
 } catch (Exception $e)
 {
     echo "ERRO AO TENTAR INSERIR NOVO CARRO " . $e->getMessage();

@@ -8,58 +8,85 @@
 </head>
 <body>
     <?php 
-        include 'header.php'; 
         require '../vendor/autoload.php';
 
         $dados = [];
+        $dadosClientes = [];
+
+
         $veiculos = new Vehicle();
         
-
         $dados = $veiculos -> listAllVehicles();
+        $dadosClientes = $veiculos -> listAllVehicleOwner(); 
+       
     ?>
 
     <div class="container mt-5">
-        <h2>Veículos Cadastrados</h2>
-        <table class="table">
-            <thead>
+        <h2>Veículos Estacionados</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Cliente</th>
+                    <th scope="col">Cliente</th>
                     <th>Modelo</th>
                     <th>Placa</th>
+                    <th>[ Entrada ]</th>
+                    <th>[ Ação ]</th>
                 </tr>
-                
+             
             </thead>
             <tbody>
                 <tr>
                     <?php 
-                        echo "<td>";
-                            foreach($dados as $indice => $valor)
-                            {
-                                echo $valor['marcaCarro'];
+                            echo "<td>"; #INSERE O NOME DO PROPRIETARIO
+                                foreach($dadosClientes as $indice => $valor)
+                                {
+                                echo $valor['nome'];
                                 echo "<br>";
-                            }
+                                }
 
-                        echo "</td>"; 
+                            echo "</td>"; 
 
-                        echo "<td>";
-                            foreach($dados as $indice => $valor)
-                            {
-                                echo $valor['marcaCarro'];
-                                echo "<br>";
-                            }
+                            echo "<td>"; # INSERE O MODELO DO CARRO
+                                foreach($dados as $indice => $valor)
+                                {
+                                    echo $valor['marcaCarro'];
+                                    echo "<br>";
+                                }
 
-                        echo "</td>"; 
+                            echo "</td>"; 
 
-                        echo "<td>";
+                            echo "<td>"; # INSERE A PLACA DO CARRO
+                                foreach($dados as $indice => $valor)
+                                {
+                                    echo $valor['placaCarro'];
+                                    echo "<br>";
+                                }
+
+                            echo "</td>";
+
+                            echo "<td>"; # INSERE O HORARIO DE ENTRADA
                             foreach($dados as $indice => $valor)
                             {
                                 echo $valor['placaCarro'];
                                 echo "<br>";
                             }
 
-                        echo "</td>"; 
-                    ?>
-                </tr>
+                            echo "</td>";
+
+                            echo "<td>";
+                            foreach($dados as $indice => $valor)
+                            {
+
+                            echo "<a href='a?$valor[cpfProprietario]' class='badge badge-warning' > Editar </a> ";
+                            echo "<a href='a?$valor[cpfProprietario]' class='badge badge-danger' > Excluir </a> ";
+                            echo "<br>";
+                            }
+                            echo "</td>";
+
+                    
+                        ?>
+
+                    </tr>
             </tbody>
         </table>
     </div>

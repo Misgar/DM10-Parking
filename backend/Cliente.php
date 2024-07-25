@@ -47,7 +47,6 @@ class Cliente
 
                 echo $this->getTelefone();
 
-               
 
                 $query -> execute();
             };

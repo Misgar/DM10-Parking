@@ -91,6 +91,33 @@ class Vehicle
 
     }
 
+    public function listAllVehicleOwner()
+
+    {
+        $data = [];
+
+        $query = $this->conn->returnConnection()->prepare
+        (
+            "SELECT carrosEStacionados.cpfProprietario, proprietarios.nome FROM 
+            carrosEstacionados INNER JOIN
+             proprietarios ON proprietarios.cpf = carrosEstacionados.cpfProprietario;"
+        );
+
+        $query -> execute();
+
+        if($query -> rowCount() > 0)
+        {
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+        }
+        else 
+        {
+            return "Erro ao retornar dados dos proprietarios.";
+        }
+    }
+
+
 
     public function deleteVehicle($cpf)
     {
