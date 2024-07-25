@@ -134,7 +134,7 @@ class Vehicle
         }
     
     }
-    public function updateVehicle($placa, $modelo, $cpf)
+    public function updateVehicle($placa, $modelo, $placaID)
     {   
         try 
         {
@@ -144,14 +144,21 @@ class Vehicle
                 "UPDATE carrosEstacionados
                  SET marcaCarro = :modelo, 
                      placaCarro = :placa
-                WHERE cpfProprietario = :cpf"
+                WHERE placaCarro = :placaID"
             );
+            echo $placa;
+            echo "<br>";
+            echo $modelo;
+            echo "<br>";
+            echo $placaID;
 
             $query -> bindValue(":modelo", $modelo);
             $query -> bindValue(":placa", $placa);
-            $query -> bindValue(":cpf", $cpf);
+            $query -> bindValue(":placaID", $placaID);
 
             $query -> execute();
+
+            
         } catch (Exception $e)
         {
             echo "Erro ao tentar atualizar veiculo " . $e->getMessage();
@@ -186,12 +193,44 @@ class Vehicle
             
             
         }
-    }  catch (Exception $e)
-    {
-        echo "Falha ao TENTAR DELETAR REGISTRO " . $e -> getMessage();
+        }  catch (Exception $e)
+            {
+                echo "Falha ao TENTAR DELETAR REGISTRO " . $e -> getMessage();
+            }
     }
 
-  
-}
-}
+public function freeParkingSpot($placa)
+    {
+        try
+        {
+            echo $placa;
+            $this->conn = new DBConnection();
+            $query = $this->conn->returnConnection()->prepare
+            (
+                "SELECT * FROM carrosEstacionados WHERE placaCarro = :placa"
+            );
 
+            $query -> bindValue(":placa", $placa);
+            $query -> execute();
+
+            
+            if ($query -> rowCount() > 0)
+            {    
+                
+                $query = $this->conn->returnConnection()->prepare
+                (
+                    "DELETE FROM carrosEstacionados WHERE placaCarro = :placa"
+                );
+    
+                $query -> bindValue(":placa", $placa);
+                $query -> execute();
+            
+            
+        }
+        }  catch (Exception $e)
+            {
+                echo "Falha ao TENTAR liberar vaga no REGISTRO " . $e -> getMessage();
+            }
+        }
+
+}

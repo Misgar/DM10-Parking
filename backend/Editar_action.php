@@ -4,10 +4,14 @@ require '../vendor/autoload.php';
 
 $nome = filter_input(INPUT_POST, 'nome_edit');
 $idade = filter_input(INPUT_POST, 'idade_edit');
+
 $celular = filter_input(INPUT_POST, 'celular_edit');
 $email = filter_input(INPUT_POST, 'email_edit');
+
 $modelo = filter_input(INPUT_POST, 'modelo_edit');
 $placa = filter_input(INPUT_POST, 'placa_edit');
+
+$placaID = filter_input(INPUT_GET, 'oldReg'); #Registro antigo da placa no sistema
 $cpf = $_POST['cliente_id'];
 
 
@@ -18,11 +22,9 @@ $veiculo = new Vehicle();
 try
 
 {
-    
     $cliente -> updateClient($nome, $idade, $celular, $email, $cpf);
-    $veiculo -> updateVehicle($placa, $modelo, $cpf);
-  
- 
+    $veiculo -> updateVehicle($placa, $modelo, $placaID);
+
     header('Location: ../public/index.php');
     
     

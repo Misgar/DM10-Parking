@@ -25,7 +25,7 @@
             
          
         ?>
-        <form action="../backend/Editar_action.php" method="POST">
+        <form action="../backend/Editar_action.php?oldReg=<?=$dados['placaCarro'];?>" method="POST">
             <div class="form-group">
                 <label for="cliente_id">CPF do Cliente</label>
                 <select name="cliente_id" class="form-control" required>

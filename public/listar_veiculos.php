@@ -28,7 +28,7 @@
                     <th scope="col">Cliente</th>
                     <th>Modelo</th>
                     <th>Placa</th>
-                    <th>[ Entrada ]</th>
+                    <th>[ CPF ]</th>
                     <th>[ Ação ]</th>
                 </tr>
              
@@ -41,11 +41,12 @@
                                 <td><?= $valorProprietarios['nome'];?></td>
                             <td><?= $valorProprietarios['marcaCarro'];?></td>
                             <td><?= $valorProprietarios['placaCarro'];?></td>
-                            <td>00</td>
+                            <td><?= $valorProprietarios['cpfProprietario'];?></td>
 
                             <td>
                                 <a href="editar_cliente_veiculo.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-warning">Editar</a>
-                                <a href="../backend/Excluir_action.php?cpf=<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir</a>
+                                <a href="../backend/Liberar_vaga.php?placa=<?=$valorProprietarios['placaCarro'] ;?>" class="badge badge-success">Liberar vaga</a>
+                                <a href="../backend/Excluir_action.php?cpf=<?=$valorProprietarios['cpfProprietario'] ;?>" class="badge badge-danger">Excluir Cliente</a>
                             </td>                                                
 
                         </tr>
