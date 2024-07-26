@@ -8,7 +8,7 @@ $conn = new DBConnection();
 
 if ($email && $senha) 
     {
-    // Hash da senha
+    //criptografando a senha em hash 
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
     // Conexão com o banco de dados
@@ -27,11 +27,15 @@ if ($email && $senha)
         $insert->execute();
 
         echo "Usuário registrado com sucesso!";
-        // Redirecionar para a página de login ou outra página
-        // header('Location: login.php');
-        // exit;
+       
+         header('Location: ../public/index.php');
+         exit;
         } catch (PDOException $e) {
-            echo "Erro ao conectar com o banco de dados: " . $e->getMessage();
+            echo "Erro ao registrar usuario no banco de dados. Possivel duplicidade" . $e->getMessage();
+           
+            header("Location: login.php");
+            
+        
         }
     } else {
         echo "Por favor, preencha todos os campos corretamente.";

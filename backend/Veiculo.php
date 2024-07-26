@@ -143,15 +143,10 @@ class Vehicle
             (
                 "UPDATE carrosEstacionados
                  SET marcaCarro = :modelo, 
-                     placaCarro = :placa
-                WHERE placaCarro = :placaID"
+                     placaCarro = :IDplaca
+                WHERE placaCarro = :placaID;"
             );
-            echo $placa;
-            echo "<br>";
-            echo $modelo;
-            echo "<br>";
-            echo $placaID;
-
+  
             $query -> bindValue(":modelo", $modelo);
             $query -> bindValue(":placa", $placa);
             $query -> bindValue(":placaID", $placaID);

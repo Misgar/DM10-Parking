@@ -10,6 +10,7 @@
     <?php 
         include 'header.php'; 
         require '../vendor/autoload.php';
+        require '../backend/secure_session.php';
 
         $placa = filter_input(INPUT_GET, "placa")
     ?>

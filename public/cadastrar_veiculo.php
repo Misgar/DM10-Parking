@@ -10,6 +10,7 @@
     <?php 
         include 'header.php'; 
         require '../vendor/autoload.php';
+        require '../backend/secure_session.php';
     ?>
 
     <div class="container mt-5">

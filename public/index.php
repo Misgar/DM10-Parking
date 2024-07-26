@@ -2,8 +2,10 @@
 <html lang="pt-br">
 
 <?php 
-session_start();
     require 'header.php';
+    
+    
+    require '../backend/secure_session.php';
     
 ?>
 <head>
@@ -18,6 +20,7 @@ session_start();
         <h1>Olá, Bem-vindo ao Sistema de Estacionamento</h1>
         <p>Use o menu acima para navegar pelo sistema.</p>
         <p href="#">Sessão ativa:<a href="#"> <?php echo $_SESSION['user_email'] ;?><a/></p>
+        <small><a href="../backend/logout.php" class="text-danger">Deslogar</a></small>
     </div>
     <?php
         require 'listar_veiculos.php';

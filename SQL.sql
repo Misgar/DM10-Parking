@@ -21,17 +21,15 @@ CREATE TABLE carrosEstacionados (
 
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_usuario VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL
 );
 
-
+DROP TABLE usuarios;
 ALTER TABLE proprietarios ADD INDEX(idPessoa);
 ALTER TABLE proprietarios CHANGE idPessoa idPessoa INT NOT NULL AUTO_INCREMENT;
 
-INSERT INTO proprietarios (cpf, nome, idade, email, celular) VALUES ('666', 'Doom Guy', 0, 'doomguysmail@gmail.com', 66666);
+INSERT INTO usuarios (email, senha) VALUES ('admin@mail.com', 'admin');
+INSERT INTO proprietarios (cpf, nome, idade, email, celular) VALUES ('99999999999', 'Doom Guy', 0, 'doomguysmail@gmail.com', 66666);
+INSERT INTO carrosEstacionados (cpfProprietario, marcaCarro, placaCarro) VALUES ('99999999999', 'Doom Car', '666');
 
-
-
-ALTER TABLE proprietarios MODIFY COLUMN  ativo VARCHAR(1) NOT NULL DEFAULT 1;

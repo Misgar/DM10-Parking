@@ -9,6 +9,8 @@
 <body>
     <?php 
         require '../vendor/autoload.php';
+        
+         # Script que verifica se existe sessão iniciada.
 
     
         $dadosClientes = [];
