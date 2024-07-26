@@ -143,7 +143,7 @@ class Vehicle
             (
                 "UPDATE carrosEstacionados
                  SET marcaCarro = :modelo, 
-                     placaCarro = :IDplaca
+                     placaCarro = :placa
                 WHERE placaCarro = :placaID;"
             );
   

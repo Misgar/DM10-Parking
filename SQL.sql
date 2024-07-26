@@ -25,7 +25,6 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL
 );
 
-DROP TABLE usuarios;
 ALTER TABLE proprietarios ADD INDEX(idPessoa);
 ALTER TABLE proprietarios CHANGE idPessoa idPessoa INT NOT NULL AUTO_INCREMENT;
 
