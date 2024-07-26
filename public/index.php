@@ -2,6 +2,7 @@
 <html lang="pt-br">
 
 <?php 
+session_start();
     require 'header.php';
     
 ?>
@@ -14,8 +15,9 @@
 <body>
 
     <div class="container mt-5">
-        <h1>Bem-vindo ao Sistema de Estacionamento</h1>
+        <h1>Olá, Bem-vindo ao Sistema de Estacionamento</h1>
         <p>Use o menu acima para navegar pelo sistema.</p>
+        <p href="#">Sessão ativa:<a href="#"> <?php echo $_SESSION['user_email'] ;?><a/></p>
     </div>
     <?php
         require 'listar_veiculos.php';
