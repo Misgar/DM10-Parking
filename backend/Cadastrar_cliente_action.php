@@ -12,6 +12,8 @@ $cliente = new Cliente();
 try
 
 {
+    # Cadastra as informações de cliente na tabela proprietarios e direciona pro cadastro de veiculo 
+    
     $cliente -> createClient($nome, $cpf, $telefone, $email);
 
     header('Location: ../public/cadastrar_veiculo.php');

@@ -5,7 +5,10 @@
 require '../vendor/autoload.php';
 
 
-
+/*
+    Arquivo contendo a classe Cliente responsável pelas operações relacionadas a cliente  na tabela
+    proprietarios.
+*/
 class Cliente
 {   
     private $cpf;
@@ -21,6 +24,9 @@ class Cliente
     // Função para inserir clientes na tabela proprietarios
     public function createClient($nome, $cpf, $telefone, $email)
     {
+        /* 
+            Método para criar registros vindos do form na tabela de proprietarios
+        */
         try
         {
             // VERIFICAR SE O CPF JÁ EXISTE NO BANCO ANTES DE INSERIR
@@ -63,6 +69,10 @@ class Cliente
      
     public function listAllClients() // Função parar retornar os clientes da tabela proprietarios
     {
+        /* 
+            Retorna um array associativo com os registros da tabela 
+            proprietarios
+        */
         $data = [];
 
         $this->conn = new DBConnection(); 
@@ -85,9 +95,13 @@ class Cliente
 
     public function listClientByCpf($cpf) // Função para retornar um cliente por ID(CPF)
     {
+        /* 
+            Metodo para retornar um unico cliente da tabela proprietarios 
+            consultando por cpfProprietario = cpf
+        */
         $data = [];
 
-        $query = $this->getConn()->returnConnection()->prepare
+        $query = $this->conn->returnConnection()->prepare
         (
             " SELECT * FROM proprietarios WHERE cpf = :cpf"
         );
@@ -107,6 +121,11 @@ class Cliente
 
     public function updateClient($nome, $idade, $celular, $email, $cpf)
     {   
+        /* 
+            Atualiza registros na tabela 
+            proprietarios
+
+        */
         try 
         {
             $this->conn = new DBConnection();
@@ -140,6 +159,11 @@ class Cliente
 
     public function deleteClient($cpf)
     {
+        /*
+            Deleta todos as linhas de registros da tabela
+            proprietarios
+            onde cpfProprietarios = cpfInformado
+        */
         try
         {
             $this->conn = new DBConnection();

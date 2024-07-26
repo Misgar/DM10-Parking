@@ -22,6 +22,9 @@ $veiculo = new Vehicle();
 try
 
 {
+    /* Atualiza os registros na tabela proprietarios, e após isso na tabela carrosEstacionados. 
+        Todos os parametros são passados, mesmo que sejam iguais, para permitir que sejam atualizados todos ou só alguns campos 
+    */
     $cliente -> updateClient($nome, $idade, $celular, $email, $cpf);
     $veiculo -> updateVehicle($placa, $modelo, $placaID);
 

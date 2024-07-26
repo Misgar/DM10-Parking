@@ -5,7 +5,10 @@
 require '../vendor/autoload.php';
 
 
-
+/* 
+    Contem a classe Veiculo, responsável pelas operações relacionadas
+    a veiculos, que são realizados na tabela carrosEstacionados.
+*/
 class Vehicle
 {   
     private $cpf;
@@ -21,6 +24,11 @@ class Vehicle
     // Função para inserir clientes na tabela proprietarios
     public function createVehicle($cpf, $modelo, $placa)
     {
+        /* 
+            realiza o cadastro de veiculos na tabela
+            carrosEstacionados
+            a partir dos parametros da função (cpf, modelo, placa)
+        */
         try
         {
             // VERIFICAR SE O CPF JÁ EXISTE NO BANCO ANTES DE INSERIR
@@ -49,6 +57,11 @@ class Vehicle
      
     public function listAllVehicles() // Função parar retornar os clientes da tabela proprietarios
     {
+        
+        /*
+            Retornar um Array Associativo contendo todos
+            os dados da tabela carrosEstacionados.
+        */
         $data = [];
 
         $this->conn = new DBConnection(); 
@@ -71,6 +84,19 @@ class Vehicle
 
     public function listVehicleInfoById($placa) // Função para retornar um cliente por ID(CPF)
     {
+        /* RETORNA UMA linha de registros contendo:
+            carrosEstacionados.modeloCarro,
+            carrosEstacionados.placaCarro,
+            proprietarios.nome,
+            proprietarios.email
+            proprietarios.idade
+            proprietarios.celular
+            proprietarios.cpf
+
+            A PARTIR DE UM INNER JOIN das tabelas:
+            carrosEstacionados e proprietaarios
+        
+        */
         $data = [];
         try
         {
@@ -106,6 +132,10 @@ class Vehicle
     }
 
     public function listAllVehicleOwner()
+    /* Lista todos os carros cadastrados na tabela carrosEstacionados
+        relacionando com a tabela proprietarios e retornando os respectivos nomes e
+        carrosEstacionados.cpfProprietarios = proprietarios.cpf
+    */
 
     {
         $data = [];
@@ -136,6 +166,13 @@ class Vehicle
     }
     public function updateVehicle($placa, $modelo, $placaID)
     {   
+        /* 
+            Atualiza registros na tabela
+            carrosEstacionados.
+                placa = placa nova
+                modelo = modelo do carro,
+                placaID = placa antiga para referencia no banco
+        */
         try 
         {
             $this->conn = new DBConnection();
@@ -163,6 +200,10 @@ class Vehicle
 
     public function deleteVehicle($cpf)
     {
+        /* 
+            Deleta linha de registro na tabela carrosEstacionados
+            a partir do CPF, então todos os registros com o mesmo cpf.
+        */
         try
         {
             $this->conn = new DBConnection();
@@ -196,6 +237,13 @@ class Vehicle
 
 public function freeParkingSpot($placa)
     {
+        /*
+            Deleta registro na tabela de
+            carrosEstacionados
+            a partir da placa. 
+            Só apaga a linha onde a placa = :placa
+            deixando os demais que pertencem a X cpf
+        */
         try
         {
             echo $placa;

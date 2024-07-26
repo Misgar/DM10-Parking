@@ -9,12 +9,19 @@ $conn = new DBConnection();
 if ($email && $senha) 
 {
     try {
-        $login = $conn->returnConnection()->prepare("SELECT * FROM usuarios WHERE email = :email");
+
+        # Verificando se o e-mail está registrado
+        $login = $conn->returnConnection()->prepare
+        (
+            "SELECT * FROM usuarios WHERE email = :email"
+        );
+
         $login->bindValue(':email', $email);
         $login->execute();
 
         $usuario = $login->fetch(PDO::FETCH_ASSOC);
        
+        #Verifica se a senha passada é igual a registrada descriptografando o hash registrado CASO existam registros do email informado
         if ($usuario && password_verify($senha, $usuario['senha'])) {
             // Login bem-sucedido
             $_SESSION['user_id'] = $usuario['id'];

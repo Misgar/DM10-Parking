@@ -12,6 +12,7 @@ $veiculo = new Vehicle();
 try
 
 {
+    #Excluindo todos os registros onde cpf = cpf nas tabelas veiculos, e em seguida na tabela proprietarios
     
     $veiculo -> deleteVehicle($cpf);
     $cliente -> deleteClient($cpf);

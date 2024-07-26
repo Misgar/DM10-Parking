@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="modelo">Nome do cliente (Obs: Será alterado para todos os veiculos!!)</label>
+                <label for="modelo">Nome do cliente (Obs: Será alterado para todos os veiculos desse cliente.)</label>
                 <input type="text" class="form-control" id="modelo" name="nome_edit" required value="<?= $dados['nome'] ;?>">
             </div>
 

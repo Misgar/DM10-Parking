@@ -1,6 +1,8 @@
 <?php
 require '../vendor/autoload.php';
 
+# REGISTRO DE NOVOS USUARIOS PARA LOGIN NO SISTEMA
+
 // Captura dos dados do formulário
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 $senha = filter_input(INPUT_POST, 'senha');
@@ -25,15 +27,16 @@ if ($email && $senha)
      
 
         $insert->execute();
-
-        echo "Usuário registrado com sucesso!";
        
          header('Location: ../public/index.php');
          exit;
+
         } catch (PDOException $e) {
+            # se HOUVER DUPLICIDADE OU ERRO, REDIRECIONA PRA TELA DE LOGIN
+            
             echo "Erro ao registrar usuario no banco de dados. Possivel duplicidade" . $e->getMessage();
            
-            header("Location: login.php");
+            header("Location: ../Public/login.php");
             
         
         }

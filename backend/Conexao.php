@@ -2,6 +2,7 @@
 
 require '../vendor/autoload.php';
 
+# Classe de conexão, responsável por retornar uma conexão valida com o Banco de Dados
 class DBConnection{
     private $database = 'estacionamento';
     private $host = 'localhost';

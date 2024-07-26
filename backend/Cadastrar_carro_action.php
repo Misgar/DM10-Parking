@@ -12,6 +12,8 @@ $carro = new Vehicle();
 try
 
 {
+    # Adiciona registro na tabela de veiculos, vinculando FK carrosEstacionados.cpfProprietarios ao proprietario.cpf e redireciona pra home listando os carros
+     
     $carro -> createVehicle($cpf, $modelo, $placa);
     
     header('Location: ../');
